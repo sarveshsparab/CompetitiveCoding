@@ -11,21 +11,9 @@ public class Q657 implements Question<Boolean> {
     }
 
     public boolean judgeCircle(String moves) {
-        return moves.chars().map(c -> conv((char)c)).boxed().collect(Collectors.summingInt(Integer::intValue))==0;
+        return moves.chars().parallel().map(c -> (char)c).filter(c->c=='U').count()==moves.chars().parallel().map(c -> (char)c).filter(c->c=='D').count()
+                &&
+                moves.chars().parallel().map(c -> (char)c).filter(c->c=='L').count()==moves.chars().parallel().map(c -> (char)c).filter(c->c=='R').count();
     }
 
-    private int conv(char c) {
-        switch (c) {
-            case 'U':
-                return 1;
-            case 'D':
-                return -1;
-            case 'L':
-                return 1;
-            case 'R':
-                return -1;
-            default:
-                return 0;
-        }
-    }
 }

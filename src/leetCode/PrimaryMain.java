@@ -9,7 +9,7 @@ public class PrimaryMain {
 
     public static void main(String args[]) {
         System.out.println("Solution : ");
-        System.out.println(quesToBeSolved.solve("LL"));
+        System.out.println(quesToBeSolved.solve("LDRRLRUULR"));
     }
 
 }
