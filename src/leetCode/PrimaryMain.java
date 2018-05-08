@@ -5,11 +5,12 @@ import leetCode.questions.*;
 
 public class PrimaryMain {
 
-    private static Question quesToBeSolved = new Q657();
+    private static Q806 quesToBeSolved = new Q806();
 
     public static void main(String args[]) {
         System.out.println("Solution : ");
-        System.out.println(quesToBeSolved.solve("LDRRLRUULR"));
+        int[] widths = {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10};
+        System.out.println(quesToBeSolved.solve(widths, "abcdefghijklmnopqrstuvwxyz"));
     }
 
 }
