@@ -5,12 +5,11 @@ import leetCode.questions.*;
 
 public class PrimaryMain {
 
-    private static Question quesToBeSolved = new Q561();
+    private static Q617 quesToBeSolved = new Q617();
 
     public static void main(String args[]) {
         System.out.println("Solution : ");
-        Integer[] nums = {1,4,3,2};
-        System.out.println(quesToBeSolved.solve(nums));
+        System.out.println(quesToBeSolved.solve());
     }
 
 }
