@@ -5,12 +5,12 @@ import leetCode.questions.*;
 
 public class PrimaryMain {
 
-    private static Question quesToBeSolved = new Q811();
+    private static Question quesToBeSolved = new Q561();
 
     public static void main(String args[]) {
         System.out.println("Solution : ");
-        String[] cpdomains = {"900 google.mail.com", "50 yahoo.com", "1 intel.mail.com", "5 wiki.org"};
-        System.out.println(quesToBeSolved.solve(cpdomains));
+        Integer[] nums = {1,4,3,2};
+        System.out.println(quesToBeSolved.solve(nums));
     }
 
 }
