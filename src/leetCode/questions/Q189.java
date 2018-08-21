@@ -3,6 +3,7 @@ package leetCode.questions;
 import common.Question;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class Q189 implements Question<Void> {
     @Override
@@ -12,9 +13,7 @@ public class Q189 implements Question<Void> {
 
     public Void rotate(int[] nums, int k) {
         int dummyArray[] = Arrays.copyOf(nums, nums.length);
-        for (int i = 0; i < nums.length; i++) {
-            nums[(i+k)%nums.length] = dummyArray[i];
-        }
+        IntStream.range(0,nums.length).parallel().forEach(x->nums[(x+k)%nums.length]=dummyArray[x]);
         return null;
     }
 }
