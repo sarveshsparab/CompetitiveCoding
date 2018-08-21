@@ -2,6 +2,8 @@ package leetCode.questions;
 
 import common.Question;
 
+import java.util.Arrays;
+
 public class Q189 implements Question<Void> {
     @Override
     public Void solve(Object... args) {
@@ -9,17 +11,9 @@ public class Q189 implements Question<Void> {
     }
 
     public Void rotate(int[] nums, int k) {
-        int temp;
-        int size = nums.length;
-        k = k%size;
-        for (int i = 0; i < k; i++) {
-            temp=nums[size-1];
-
-            for(int j=size-1;j>0;j--){
-                nums[j]=nums[j-1];
-            }
-
-            nums[0] = temp;
+        int dummyArray[] = Arrays.copyOf(nums, nums.length);
+        for (int i = 0; i < nums.length; i++) {
+            nums[(i+k)%nums.length] = dummyArray[i];
         }
         return null;
     }
