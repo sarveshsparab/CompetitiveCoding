@@ -1,6 +1,7 @@
 package leetCode.questions;
 
-import javax.xml.soap.Node;
+import java.util.LinkedList;
+import java.util.Queue;
 
 class TreeNode {
     int val;
@@ -10,9 +11,6 @@ class TreeNode {
     TreeNode(int x) {
         val = x;
     }
-}
-enum NodeType {
-    LEFTCHILD, RIGHTCHILD, ROOTNODE
 }
 
 public class Q513 {
@@ -43,23 +41,27 @@ public class Q513 {
     }
 
     public static int findBottomLeftValue(TreeNode root) {
-        findBottomLeftValueRecursive(root,  NodeType.ROOTNODE, 0, 0);
-        return answer==null?root.val:answer.val;
-    }
+        if(root==null)
+            return 0;
 
-    public static void findBottomLeftValueRecursive(TreeNode node, NodeType type, int level, int maxLevel){
-        if(node==null){
-            return;
+        TreeNode answer = null;
+
+        Queue<TreeNode> treeQ = new LinkedList<>();
+        ((LinkedList<TreeNode>) treeQ).push(root);
+        while(!treeQ.isEmpty()){
+            int qSize = treeQ.size();
+            for(int i=0;i<qSize;i++){
+                TreeNode current = treeQ.poll();
+                if(i==0)
+                    answer = current;
+                if(current.left!=null)
+                    treeQ.offer(current.left);
+                if(current.right!=null)
+                    treeQ.offer(current.right);
+            }
         }
 
-        if(type==NodeType.LEFTCHILD && node.left==null && node.right==null && level>maxLevel){
-            maxLevel = level;
-            answer = node;
-            return;
-        }
-
-        findBottomLeftValueRecursive(node.left, NodeType.LEFTCHILD, level+1, maxLevel);
-        findBottomLeftValueRecursive(node.right, NodeType.RIGHTCHILD, level+1, maxLevel);
+        return answer.val;
     }
 
     private static void traverse(TreeNode root){
