@@ -7,61 +7,39 @@ import java.util.Queue;
 
 public class Q785 {
 
-    private static int[] nodeLevel = new int[101];
-    private static boolean[] visitedNodes = new boolean[101];
-    private static Queue<Integer> q = new LinkedList<>();
-    private static Map<Integer,Integer> unvisitedEdges = new HashMap<>();
-
     public static void main(String args[]){
-        /*System.out.println(isBipartite(new int[][]{
+        System.out.println(isBipartite(new int[][]{
                 {1,3}, {0,2}, {1,3}, {0,2}
-        }));*/
+        }));
 
         /*System.out.println(isBipartite(new int[][]{
                 {1,2,3}, {0,2}, {0,1,3}, {0,2}
         }));*/
 
-        System.out.println(checkBipartite(new int[][]{
+        /*System.out.println(isBipartite(new int[][]{
                 {}
-        }));
+        }));*/
 
     }
 
     public static boolean isBipartite(int[][] graph) {
-        for(int i=0;i<visitedNodes.length;i++)
-            if(!visitedNodes[i])
-                if(!checkBipartite(graph))
-                    return false;
-
-        return true;
-    }
-
-    public static boolean checkBipartite(int[][] graph) {
-
-        visitedNodes[0] = true;
-        q.add(0);
-        nodeLevel[0] = 1;
-
-        while(!q.isEmpty()) {
-            int currentNode = q.poll();
-            int[] currentNodeNeighbors = graph[currentNode];
-
-            for(int child : currentNodeNeighbors)
-                nodeLevel[child]=nodeLevel[child]==0?nodeLevel[currentNode]+1:nodeLevel[child];
-
-            for(int newNode : currentNodeNeighbors){
-                if(!visitedNodes[newNode]){
-                    visitedNodes[newNode]=true;
-                    q.add(newNode);
-                }else
-                    unvisitedEdges.put(currentNode,newNode);
+        int[] color = new int[graph.length];
+        for (int i = 0; i < graph.length; i++)
+            if (color[i] == 0) {
+                Queue<Integer> q = new LinkedList<>();
+                q.add(i);
+                color[i] = 1;
+                while (!q.isEmpty()) {
+                    Integer currentNode = q.poll();
+                    for (int neighbor : graph[currentNode])
+                        if (color[neighbor] == color[currentNode])
+                            return false;
+                        else if (color[neighbor] == 0) {
+                            q.add(neighbor);
+                            color[neighbor] = -color[currentNode];
+                        }
+                }
             }
-        }
-
-        for(Map.Entry<Integer, Integer> entry : unvisitedEdges.entrySet())
-            if(Math.abs(nodeLevel[entry.getKey()]-nodeLevel[entry.getValue()])==0)
-                return false;
-
         return true;
     }
 
